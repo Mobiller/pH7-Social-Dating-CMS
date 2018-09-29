@@ -144,20 +144,20 @@ class AddFakeProfilesFormProcess extends Form
         $aData = [];
         $aData['username'] = $sUsername;
         $aData['email'] = $sEmail;
-        $aData['first_name'] = $aUser['name']['first'];
-        $aData['last_name'] = $aUser['name']['last'];
+        $aData['first_name'] = ucwords($aUser['name']['first']);
+        $aData['last_name'] = ucwords($aUser['name']['last']);
         $aData['password'] = $aUser['login']['password'];
         $aData['sex'] = $aUser['gender'];
         $aData['match_sex'] = array($oUser->getMatchSex($aData['sex']));
         $aData['country'] = Country::fixCode($aUser['nat']);
-        $aData['city'] = $aUser['location']['city'];
-        $aData['state'] = $aUser['location']['state'];
+        $aData['city'] = ucwords($aUser['location']['city']);
+        $aData['state'] = ucwords($aUser['location']['state']);
+        $aData['address'] = ucwords($aUser['location']['street']);
         $aData['zip_code'] = $aUser['location']['postcode'];
         $aData['birth_date'] = $this->dateTime->get($aUser['dob']['date'])->date('Y-m-d');
         $aData['avatar'] = $aUser['picture']['large'];
         $aData['ip'] = Ip::get();
-        $aData['website'] = Core::SOFTWARE_WEBSITE;
-
+      //$aData['website'] = Core::SOFTWARE_WEBSITE;
         return $aData;
     }
 
